@@ -18,7 +18,7 @@ class ShoppingListTableViewController: UITableViewController {
   var user: User!
   var userCountBarButtonItem: UIBarButtonItem!
   let shoppingItemsReference = Database.database().reference(withPath: "shopping-items")
-  
+  let usersReference = Database.database().reference(withPath: "online")
   // MARK: UIViewController Lifecycle
   
   override func viewDidLoad() {
@@ -32,8 +32,6 @@ class ShoppingListTableViewController: UITableViewController {
                                              action: #selector(userCountButtonDidTouch))
     userCountBarButtonItem.tintColor = UIColor.white
     navigationItem.leftBarButtonItem = userCountBarButtonItem
-    
-    user = User(uid: "FakeId", email: "hungry@person.food")
     
     
     // print all data in database
@@ -60,11 +58,19 @@ class ShoppingListTableViewController: UITableViewController {
         self.items = newItems
         self.tableView.reloadData()
       }
+      
+      
+     Auth.auth().addStateDidChangeListener { (auth, user) in
+      if let user = user {
+        self.user = User(uid: user.uid , email: user.email!)
+        let currentUserReference = self.usersReference.child(self.user.uid)
+        currentUserReference.setValue(self.user.email)
+        currentUserReference.onDisconnectRemoveValue()
+      }
+    
     }
     
-    
-    
-    
+    }
     
   }
   

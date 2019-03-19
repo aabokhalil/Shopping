@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03C3DB48F96CC13D72C67950 /* libPods-Shopping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 395DC9432DBD77E3FB9E87B7 /* libPods-Shopping.a */; };
+		2B16431422411C0B00AD59CB /* UIAllert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B16431322411C0B00AD59CB /* UIAllert.swift */; };
 		2B4A07CD224035B7007D5E62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B4A07CC224035B7007D5E62 /* GoogleService-Info.plist */; };
 		BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */; };
 		BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		29BAE5A3A72019E76842D026 /* Pods-Shopping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopping.release.xcconfig"; path = "Target Support Files/Pods-Shopping/Pods-Shopping.release.xcconfig"; sourceTree = "<group>"; };
 		2B16430F2241052A00AD59CB /* Shopping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shopping.entitlements; sourceTree = "<group>"; };
+		2B16431322411C0B00AD59CB /* UIAllert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAllert.swift; sourceTree = "<group>"; };
 		2B4A07CC224035B7007D5E62 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		395DC9432DBD77E3FB9E87B7 /* libPods-Shopping.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Shopping.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB23855C1B3DD5AB0079CD01 /* Shopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B16431022411B9300AD59CB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2B16431322411C0B00AD59CB /* UIAllert.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		7468BAC1AF3F60D41742F473 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +81,7 @@
 		BB2385531B3DD5AB0079CD01 = {
 			isa = PBXGroup;
 			children = (
+				2B16431022411B9300AD59CB /* Extension */,
 				BB23855E1B3DD5AB0079CD01 /* Shopping */,
 				2B4A07CC224035B7007D5E62 /* GoogleService-Info.plist */,
 				BB23855D1B3DD5AB0079CD01 /* Products */,
@@ -260,6 +271,7 @@
 				BB23858A1B3DD9640079CD01 /* ShoppingItem.swift in Sources */,
 				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
+				2B16431422411C0B00AD59CB /* UIAllert.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

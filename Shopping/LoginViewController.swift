@@ -24,14 +24,59 @@ class LoginViewController: UIViewController {
     let childRef = Database.database().reference(withPath: "shopping-items")
     let itemsRef = rootRef.child("shopping-items")
 
+ //    observe login state , if so , go to ...
     
+//    let listene = Auth.auth().addStateDidChangeListener { (auth, user) in
+//      if user != nil {
+//        print("from viewdidload jkhlkjlkjhlkjhlkhjhlkhljkhlkhlkhljklkjhlkjhlkhjlk")
+//        print(user?.email)
+//        self.performSegue(withIdentifier: self.loginToList, sender: nil)
+//      }
+//    }
+//    Auth.auth().removeStateDidChangeListener(listene)
   }
   
   
   // MARK: Actions
   @IBAction func loginDidTouch(_ sender: AnyObject) {
-    performSegue(withIdentifier: loginToList, sender: nil)
-  }
+   
+    guard let email =
+      textFieldLoginEmail.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
+      showAlert(title: "Error", message: "Email Is Empty")
+      return
+    }
+    
+    guard let password = textFieldLoginPassword.text, !password.isEmpty else {
+      showAlert(title: "Error", message: "Password Is Empty")
+      return
+    }
+    
+    self.view.endEditing(true)
+    Auth.auth().signIn(withEmail: email, password: password) { (user, error)  in
+
+      if  ((user) != nil) {
+        self.performSegue(withIdentifier: self.loginToList, sender: nil)
+      } else {
+        self.showAlert(title: "Error", message: "No such user ")
+      }
+
+        if error != nil {
+          if let errorCode = AuthErrorCode(rawValue: error!._code){
+            switch errorCode {
+            case .nullUser :
+              self.showAlert(title: "Error", message: "No Such User !")
+            case .weakPassword :
+              self.showAlert(title: "Error", message: "Please provide a strong password")
+              print("Please provide a strong password")
+            default :
+              print("there is an error")
+            }
+          }
+        }
+      }
+    
+    }
+    
   
   @IBAction func signUpDidTouch(_ sender: AnyObject) {
     let alert = UIAlertController(title: "Register",
@@ -40,18 +85,29 @@ class LoginViewController: UIViewController {
     
     let saveAction = UIAlertAction(title: "Save",
                                    style: .default) { action in
-    let emailField = alert.textFields![0]
-    let passwordField = alert.textFields![1]
+                                    let emailField = alert.textFields![0]
+                                    let passwordField = alert.textFields![1]
                                     Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { user, error in
                                       if error != nil {
-                                        print(error?.localizedDescription)
-                                      }
-                                      var user = Auth.auth().currentUser
-                                      if user != nil {
-                                        user?.sendEmailVerification() { (error) in
-                                          print(error?.localizedDescription )
+                                        if let errorCode = AuthErrorCode(rawValue: error!._code){
+                                          switch errorCode {
+                                          case .weakPassword :
+                                            self.showAlert(title: "Error", message: "Please provide a strong password")
+                                            print("Please provide a strong password")
+                                          default :
+                                            print("there is an error")
+                                          }
                                         }
+                                        
                                       }
+//                                      let user = Auth.auth().currentUser
+//                                      if user != nil {
+////                                        user?.sendEmailVerification() { (error) in
+////                                          print(error?.localizedDescription )
+////                                        }
+                                        Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!)
+                                        self.performSegue(withIdentifier: self.loginToList, sender: nil)
+//                                      }
                                     }
     }
     
